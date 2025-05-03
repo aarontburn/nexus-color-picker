@@ -1,9 +1,9 @@
 {
     "name": "{EXPORTED_MODULE_NAME}",
-    "author": "developer",
+    "author": "aarontburn",
     "version": "1.0.0",
-    "description": "A template to create a module for Nexus using React.",
+    "description": "A module for Nexus to pick and manage colors from your desktop.",
     "build_version": 1,
-    "link": "https://github.com/aarontburn/nexus-template-react",
-    "platforms": ["win32", "linux", "darwin"]
+    "link": "https://github.com/aarontburn/nexus-color-picker",
+    "platforms": ["win32"]
 }

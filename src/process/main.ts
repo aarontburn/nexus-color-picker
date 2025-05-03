@@ -1,6 +1,7 @@
 import * as path from "path";
 import { DataResponse, Process, Setting } from "@nexus-app/nexus-module-builder";
 import { BooleanSetting } from "@nexus-app/nexus-module-builder/settings/types";
+import { getScreenColor } from "./screen-eyedropper";
 
 // These is replaced to the ID specified in export-config.js during export. DO NOT MODIFY.
 const MODULE_ID: string = "{EXPORTED_MODULE_ID}";
@@ -13,7 +14,7 @@ const HTML_PATH: string = path.join(__dirname, "../renderer/index.html");
 // Can be a .png, .jpeg, .jpg, or .svg
 // const ICON_PATH: string = path.join(__dirname, "...")
 
-const ICON_PATH: string = undefined;
+const ICON_PATH: string = path.join(__dirname, "../assets/icon.png");
 
 
 export default class SampleProcess extends Process {
@@ -52,8 +53,8 @@ export default class SampleProcess extends Process {
                 this.initialize();
                 break;
             }
-            case "count": {
-                console.info(`[${MODULE_NAME}] Received 'count': ${data[0]}`);
+            case "pick-from-screen": {
+                getScreenColor().then((color: string) => color && this.sendToRenderer('set-color', color))
                 break;
             }
 
