@@ -1,17 +1,18 @@
-<h1 align="center">Nexus</h1>
-<h2 align="center">React Module Template</h2>
+# [Nexus](https://github.com/aarontburn/nexus-core): Color Picker
+
+A simple and minimalistic color picker for Nexus.
 
 <p align="center">
-	<img src="./repo-assets/256x256.png" alt="Nexus Logo" width="200" />
+  <img src="./repo-assets/image.png" alt="Color Picker Sample" width="1000"/>
 </p>
 
-A template for [Nexus](https://github.com/aarontburn/nexus-core) to develop modules using React + TypeScript.
 
+## Installation
+1. Download the latest release `.zip`. 
+2. In Nexus, navigate to **Settings** > **Import Module**
+3. Select the downloaded `.zip` file to install.
 
-## Getting Started
-To learn how to develop a module for Nexus, visit [Building Your First Module](https://github.com/aarontburn/nexus-core/blob/main/docs/getting_started/tutorial/BuildingYourFirstModule.md).
-
-## Examples
-
-### [Nexus: Debug Console](https://github.com/aarontburn/nexus-debug-console)
-A useful debug console/terminal.
+## Features
+- **Quick Copy**: Quickly copy the color in the desired format (hex, rgb, hla) by clicking the colors on the left of the picker.
+- **Screen Eyedropper**: Get the color of a pixel on your screen.
+- **Manual Input**: Manually set the fields on the right of the color picker.

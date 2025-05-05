@@ -2,6 +2,7 @@ import * as path from "path";
 import { DataResponse, Process, Setting } from "@nexus-app/nexus-module-builder";
 import { BooleanSetting } from "@nexus-app/nexus-module-builder/settings/types";
 import { getScreenColor } from "./screen-eyedropper";
+import { clipboard } from "electron";
 
 // These is replaced to the ID specified in export-config.js during export. DO NOT MODIFY.
 const MODULE_ID: string = "{EXPORTED_MODULE_ID}";
@@ -17,7 +18,7 @@ const HTML_PATH: string = path.join(__dirname, "../renderer/index.html");
 const ICON_PATH: string = path.join(__dirname, "../assets/icon.png");
 
 
-export default class SampleProcess extends Process {
+export default class ColorPickerProcess extends Process {
 
     /**
      *  The constructor. At this point, the renderer may not be fully initialized yet;
@@ -58,6 +59,17 @@ export default class SampleProcess extends Process {
                 break;
             }
 
+            case 'copy': {
+                const value: string = data[0];
+
+                if (value[0] === '#' && !this.getSettings().findSetting('copy_hex_hashtag').getValue()) {
+                    clipboard.writeText(value.slice(1));
+                } else {
+                    clipboard.writeText(value);
+                }
+                break;
+            }
+
             default: {
                 console.info(`[${MODULE_NAME}] Unhandled event: eventType: ${eventType} | data: ${data}`);
                 break;
@@ -68,21 +80,29 @@ export default class SampleProcess extends Process {
     // Add settings/section headers.
     public registerSettings(): (Setting<unknown> | string)[] {
         return [
-            "Sample Setting Group",
             new BooleanSetting(this)
+                .setName("Copy Hex Colors with #")
+                .setDefault(true)
+                .setAccessID('copy_hex_hashtag'),
+
+            new BooleanSetting(this)
+                .setName("Copy with alpha channels")
+                .setDescription('Uses rgba and hsla, and hex8 for alpha channel support.')
                 .setDefault(false)
-                .setName("Sample Toggle Setting")
-                .setDescription("An example of a true/false setting.")
-                .setAccessID('sample_bool'),
+                .setAccessID('use_alpha')
 
         ];
     }
 
     // Fired whenever a setting is modified.
     public async onSettingModified(modifiedSetting: Setting<unknown>): Promise<void> {
-        if (modifiedSetting.getAccessID() === "sample_bool") {
-            this.sendToRenderer('sample-setting', modifiedSetting.getValue());
+        switch (modifiedSetting.getAccessID()) {
+            case 'use_alpha': {
+                this.sendToRenderer('use_alpha', modifiedSetting.getValue())
+                break
+            };
         }
+
     }
 
 

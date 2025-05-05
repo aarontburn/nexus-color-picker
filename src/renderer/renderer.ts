@@ -47,23 +47,19 @@ window.addEventListener("message", (event) => {
 });
 
 
-let accentColor: string | undefined = "";
-const observer = new MutationObserver((mutations: MutationRecord[]) => {
-    mutations.forEach((mutationRecord: MutationRecord) => {
-        const cssString: string = (mutationRecord.target as HTMLElement).attributes.getNamedItem("style").value;
-        const splitString: string[] = cssString.split(";");
 
-        for (const s of splitString) {
-            if (s.includes("--accent-color")) {
-                const value: string = s.split(" ")[1];
-                if (value !== accentColor) {
-                    accentColor = value;
-                    sendToIFrame("accent-color-changed", value);
-                }
-                break;
-            }
-        }
-    });
+let accentColor: string | undefined = "";
+const observer = new MutationObserver(() => {
+    const value = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+    if (value && value !== accentColor) {
+        accentColor = value;
+        sendToIFrame("accent-color-changed", value);
+    }
 });
-observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] })
+
+
+observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['style']
+});
 

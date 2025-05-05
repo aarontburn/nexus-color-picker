@@ -3,7 +3,9 @@
     "author": "aarontburn",
     "version": "1.0.0",
     "description": "A module for Nexus to pick and manage colors from your desktop.",
-    "build_version": 1,
+    "build_version": 2,
     "link": "https://github.com/aarontburn/nexus-color-picker",
-    "platforms": ["win32"]
+    "platforms": [
+        "win32"
+    ]
 }

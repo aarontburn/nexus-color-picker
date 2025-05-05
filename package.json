@@ -1,7 +1,4 @@
 {
-  "name": "nexus-color-picker",
-  "version": "1.0.0",
-  "description": "React template to create an module.",
   "author": "aarontburn",
   "config": {
     "react-wrapper-directory": "./src/renderer/react-wrapper"
