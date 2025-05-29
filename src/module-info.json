@@ -1,8 +1,9 @@
 {
     "name": "Color Picker",
     "author": "aarontburn",
+    "author-id": "683193056e5989838dcf772c",
     "id": "aarontburn.Color_Picker",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A module for Nexus to pick and manage colors from your desktop.",
     "link": "https://github.com/aarontburn/nexus-color-picker",
     "git-latest": {
@@ -13,7 +14,7 @@
         "win32"
     ],
     "build": {
-        "build-version": 2,
+        "build-version": 3,
         "excluded": [
             "electron.ts",
             "./renderer/react-wrapper"
